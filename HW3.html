@@ -9,13 +9,19 @@
 </head>
 
 <body>
-    <canvas></canvas>
-    <button onclick="animateImage()">Start</button>
-    <button onclick="stopAnimation()">Stop</button>
-    <button onclick="nextPrev(1)">Next</button>
-    <button onclick="nextPrev(0)">Prev</button>
+    <h1>Fetch and Animations</h1>
+    <p>This is a character i made with pixel art for my python(pygame) videogame project. </p>
+    <h2>
+        <canvas></canvas>
+    </h2>
+    <h3>
+        <button onclick="animateImage()">Start</button>
+        <button onclick="stopAnimation()">Pause</button>
+        <button onclick="nextPrev(1)">Next</button>
+        <button onclick="nextPrev(0)">Prev</button>
+    </h3>
     <script>
-        
+
         var images = []
         images.length = 11
         let url = "images/idle/"
@@ -27,18 +33,11 @@
                     const imageObjectURL = URL.createObjectURL(imageBlob);
                     const image = document.createElement('img')
                     image.src = imageObjectURL
-                    images[i]=image;
+                    images[i] = image;
                 });
         }
-        
 
-        /*var images = []
-        images.length = 11
-        for (let i = 1; i < 11; i++) {
-            images[i] = new Image()
-            images[i].src = "images/idle/" + i + ".png"
-        }
-        */
+
         var c = document.querySelector('canvas').getContext('2d')
         var animationState = 0;
         var intervalID = 0
@@ -56,31 +55,31 @@
                 }, 100)
             }
         }
-        
-        function stopAnimation(){
+
+        function stopAnimation() {
             clearInterval(intervalID);
-            animationState=0;
+            animationState = 0;
         }
 
-        function nextPrev(state){
-            if(state == 0){
-                c.clearRect(100,30,100,100)
-                i = i-2
-                if(i == -1){
-                    i=9
-                }else if(i==0){
-                    i=10
+        function nextPrev(state) {
+            if (state == 0) {
+                c.clearRect(100, 30, 100, 100)
+                i = i - 2
+                if (i == -1) {
+                    i = 9
+                } else if (i == 0) {
+                    i = 10
                 }
-                c.drawImage(images[i],100,30,100,100)
-            }else{
-                c.clearRect(100,30,100,100)
-                i = i+2
-                if(i == 12){
-                    i=2
-                }else if(i==11){
-                    i=1
+                c.drawImage(images[i], 100, 30, 100, 100)
+            } else {
+                c.clearRect(100, 30, 100, 100)
+                i = i + 2
+                if (i == 12) {
+                    i = 2
+                } else if (i == 11) {
+                    i = 1
                 }
-                c.drawImage(images[i],100,30,100,100)
+                c.drawImage(images[i], 100, 30, 100, 100)
             }
         }
 
