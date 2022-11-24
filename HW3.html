@@ -16,7 +16,8 @@
     </h2>
     <h3>
         <button onclick="animateImage()">Start</button>
-        <button onclick="stopAnimation()">Pause</button>
+        <button onclick="stopAnimation()">Stop</button>
+        <button onclick="pauseAnimation()">Pause</button>
         <button onclick="nextPrev(1)">Next</button>
         <button onclick="nextPrev(0)">Prev</button>
     </h3>
@@ -56,9 +57,14 @@
             }
         }
 
-        function stopAnimation() {
+        function pauseAnimation() {
             clearInterval(intervalID);
             animationState = 0;
+        }
+        function stopAnimation(){
+            clearInterval(intervalID);
+            animationState=0;
+            i = 1
         }
 
         function nextPrev(state) {
