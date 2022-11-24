@@ -10,17 +10,16 @@
 
 <body>
     <canvas></canvas>
+    <button onclick="animateImage()">Start</button>
+    <button onclick="stopAnimation()">Stop</button>
+    <button onclick="nextPrev(1)">Next</button>
+    <button onclick="nextPrev(0)">Prev</button>
     <script>
-        var canvas = document.querySelector('canvas').getContext('2d')
-
-        canvas.width = window.innerWidth
-        canvas.height = window.innerHeight
-
-
+        
         var images = []
         let url = "images/idle/"
         for (let i = 1; i < 6; i++) {
-            let fetchURL = url + i +".png"
+            let fetchURL = url + i + ".png"
             fetch(fetchURL)
                 .then(response => response.blob())
                 .then(imageBlob => {
@@ -30,18 +29,61 @@
                     images.push(image)
                 });
         }
-        console.log(images);
-
-        var i = 0;
         
-        setInterval(function(){
-            i++;
-            if(i >=4){
-                i=0;
-            }
 
-            canvas.drawImage(images[i],100,100,100,100);
-        },100)
+        /*var images = []
+        images.length = 11
+        for (let i = 1; i < 11; i++) {
+            images[i] = new Image()
+            images[i].src = "images/idle/" + i + ".png"
+        }
+        */
+        var c = document.querySelector('canvas').getContext('2d')
+        var animationState = 0;
+        var intervalID = 0
+        var i = 1;
+        function animateImage() {
+            if (animationState == 0) {
+                animationState = 1;
+                intervalID = setInterval(function () {
+                    c.clearRect(100, 30, 100, 100)
+                    c.drawImage(images[i], 100, 30, 100, 100)
+                    i++
+                    if (i > 10) {
+                        i = 1;
+                    }
+                }, 100)
+            }
+        }
+        
+        function stopAnimation(){
+            clearInterval(intervalID);
+            animationState=0;
+        }
+
+        function nextPrev(state){
+            if(state == 0){
+                c.clearRect(100,30,100,100)
+                i = i-2
+                if(i == -1){
+                    i=9
+                }else if(i==0){
+                    i=10
+                }
+                c.drawImage(images[i],100,30,100,100)
+            }else{
+                c.clearRect(100,30,100,100)
+                i = i+2
+                if(i == 12){
+                    i=2
+                }else if(i==11){
+                    i=1
+                }
+                c.drawImage(images[i],100,30,100,100)
+            }
+        }
+
+
 
 
 
