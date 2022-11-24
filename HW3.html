@@ -17,8 +17,9 @@
     <script>
         
         var images = []
+        images.length = 11
         let url = "images/idle/"
-        for (let i = 1; i < 6; i++) {
+        for (let i = 1; i < 11; i++) {
             let fetchURL = url + i + ".png"
             fetch(fetchURL)
                 .then(response => response.blob())
@@ -26,7 +27,7 @@
                     const imageObjectURL = URL.createObjectURL(imageBlob);
                     const image = document.createElement('img')
                     image.src = imageObjectURL
-                    images.push(image)
+                    images[i]=image;
                 });
         }
         
