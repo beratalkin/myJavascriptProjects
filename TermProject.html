@@ -1,14 +1,30 @@
 <html>
-    <head>
-        <title>Snake Game</title>
-    </head>
 
-    <body>
-        <button></button>
-        <button></button>
-        <button></button>
-        <div></div>
-        <canvas id = "canvas" width = 600 height = 600></canvas>
-        <script src = "snake.js"></script>
-    </body>
+<head>
+    <title>Snake Game</title>
+    <style>
+        body {
+    max-width: max-content;
+    margin: auto;
+}
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center;">Survival Snake Game!</h1>
+    <div>
+        <button onclick="newGameButton()" style = "background-color: yellow;color: black; padding: 8px 65px;">New Game</button>
+        <button onclick="pauseButton()" style = "background-color: yellow;color: black; padding: 8px 65px;">Pause</button>
+        <button style = "background-color: yellow;color: black; padding: 8px 65px;">How to Play</button>
+    </div>
+    <hr>
+    <div>
+        Score: 
+        <input type=number id=score> 
+    </div>
+    <hr>
+    <canvas id="canvas" width = "600px" height="600px"></canvas>
+    <script src="snake.js"></script>
+</body>
+
 </html>

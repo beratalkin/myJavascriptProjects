@@ -61,18 +61,22 @@ class Apple{
 
 var canvas = document.getElementById("canvas")
 
-var snake = new Snake(20,20,20);
+var snake = new Snake(50,50,50);
 
 var apple = new Apple();
 
 var canvasContext = canvas.getContext('2d');
+
+var x;
+
+var pauseControl = 0;
 
 window.onload = () =>{
     gameLoop();
 }
 
 function gameLoop(){
-    setInterval(show, 1000/5)
+    x = setInterval(show, 1000/5)
 }
 
 function show(){
@@ -99,7 +103,8 @@ function eatApple(){
 function checkEatItself(){
     for(var i = 0; i<snake.tail.length-2;i++){
         if(snake.tail[snake.tail.length-1].x==snake.tail[i].x && snake.tail[snake.tail.length-1].y==snake.tail[i].y){
-            console.log("Died");
+            alert("You ate yourself! your high score was " + score.value);
+            newGameButton();
         }
     }
 }
@@ -122,22 +127,20 @@ function draw(){
         createRect(snake.tail[i].x + 2.5, snake.tail[i].y + 2.5, snake.size - 5, snake.size -5, 'green')
     }
 
-    canvasContext.font = "20px Arial"
-    canvasContext.fillStyle = "#00FF42"
-    canvasContext.fillText("Score " + (snake.tail.length-1),canvas.width-120,18);
+    score.value = snake.tail.length-1
     createRect(apple.x,apple.y,apple.size,apple.size,apple.color)
 
 }
 
 function canvasBackground(){
-    for(var i = 0; i<30;i++){
-        for(var x = 0; x<30;x++){
+    for(var i = 0; i<24;i++){
+        for(var x = 0; x<24;x++){
             if(i%2==x%2){
                 canvasContext.fillStyle = "white"
-                canvasContext.fillRect(20*i,20*x,20,20);
+                canvasContext.fillRect(50*i,50*x,50,50);
             }else{
                 canvasContext.fillStyle = "yellow"
-                canvasContext.fillRect(20*i,20*x,20,20);
+                canvasContext.fillRect(50*i,50*x,50,50);
             }
         }
     }
@@ -194,6 +197,7 @@ function checkDirection() {
 }
 
 canvas.addEventListener('touchstart', e => {
+  e.preventDefault();
   touchStartX = e.changedTouches[0].screenX
   touchStartY = e.changedTouches[0].screenY
 })
@@ -203,3 +207,25 @@ canvas.addEventListener('touchend', e => {
   touchEndY = e.changedTouches[0].screenY
   checkDirection()
 })
+
+//buttons
+
+function newGameButton(){
+    while(snake.tail.length-1!=0){
+        snake.tail.pop()
+    }
+    
+    apple = new Apple();
+}
+
+function pauseButton(){
+
+    if(pauseControl==0){
+        x = clearInterval(x)
+        pauseControl = 1;
+    }else{
+        x = setInterval(show,1000/5)
+        pauseControl = 0;
+    }
+
+}
