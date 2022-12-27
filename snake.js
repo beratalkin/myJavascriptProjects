@@ -220,7 +220,7 @@ function newGameButton(){
     }
     x = clearInterval(x);
     x=setInterval(show, 1000/5)
-    gameSpeed=0;
+    gameSpeed=5;
     apple = new Apple();
 }
 
