@@ -71,6 +71,8 @@ var x;
 
 var pauseControl = 0;
 
+var gameSpeed = 5;
+
 window.onload = () =>{
     gameLoop();
 }
@@ -97,6 +99,8 @@ function eatApple(){
     if(snake.tail[snake.tail.length-1].x == apple.x && snake.tail[snake.tail.length-1].y == apple.y){
         snake.tail[snake.tail.length] = {x:apple.x, y: apple.y}
         apple = new Apple();
+        x = clearInterval(x)
+        x = setInterval(show, 1000/++gameSpeed)
     }
 }
 
@@ -214,7 +218,9 @@ function newGameButton(){
     while(snake.tail.length-1!=0){
         snake.tail.pop()
     }
-    
+    x = clearInterval(x);
+    x=setInterval(show, 1000/5)
+    gameSpeed=0;
     apple = new Apple();
 }
 
