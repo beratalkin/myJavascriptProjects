@@ -100,14 +100,15 @@ function eatApple(){
         snake.tail[snake.tail.length] = {x:apple.x, y: apple.y}
         apple = new Apple();
         x = clearInterval(x)
-        x = setInterval(show, 1000/++gameSpeed)
+        gameSpeed+=0.2
+        x = setInterval(show, 1000/gameSpeed)
     }
 }
 
 function checkEatItself(){
     for(var i = 0; i<snake.tail.length-2;i++){
         if(snake.tail[snake.tail.length-1].x==snake.tail[i].x && snake.tail[snake.tail.length-1].y==snake.tail[i].y){
-            alert("You ate yourself! your high score was " + score.value);
+            alert("You ate yourself! your score was " + score.value);
             newGameButton();
         }
     }
@@ -234,4 +235,8 @@ function pauseButton(){
         pauseControl = 0;
     }
 
+}
+
+function howToPlayButton(){
+    alert("Use arrow keys or finger swipes to control the snake. You must eat as many apples as you can without eating yourself!")
 }
