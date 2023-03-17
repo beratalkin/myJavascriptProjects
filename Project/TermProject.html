@@ -1,0 +1,27 @@
+<html>
+
+<head>
+    <title>Snake Game</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="manifest" href="manifest.json">
+    <script>navigator.serviceWorker.register('sw.js')</script>
+</head>
+
+<body>
+    <h1>Survival Snake Game!</h1>
+    <div>
+        <button onclick="newGameButton()" style = "background-color: yellow;color: black; padding: 8px 25px;">New Game</button>
+        <button onclick="pauseButton()" style = "background-color: yellow;color: black; padding: 8px 25px;">Pause</button>
+        <button onclick="howToPlayButton()" style = "background-color: yellow;color: black; padding: 8px 25px;">How to Play</button>
+    </div>
+    <hr>
+    <div>
+        Score: 
+        <input type=number id=score> 
+    </div>
+    <hr>
+    <canvas id="canvas" width = "400px" height="400px"></canvas>
+    <script src="snake.js"></script>
+</body>
+
+</html>

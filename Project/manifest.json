@@ -1,0 +1,9 @@
+{
+    "name": "Snake Game",
+    "short_name": "Snake",
+    "id": "snakegame",
+    "start_url": "snakegame.html",
+    "display": "standalone",
+    "theme_color": "#ffffff",
+    "background_color": "bisque"
+  }
