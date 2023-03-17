@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" href="https://blm-fsmvu.github.io/305/images/icon192.png">
+    <title>Event Listeners </title>
+
+    <style>
+        /* CSS comment */
+        body {
+            max-width: 440px;
+        }
+
+        #url {
+            width: 190px;
+        }
+
+        span,
+        #url {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HTML comment: Modify all items marked xxx -->
+
+    <h2 id=title title="Put your name here"></h2>
+    <p title="navigator.platform">
+        Battery Status: <span id=sta></span>
+    </p>
+    <p title="Battery level (integer)">
+        Battery level: <span id=lev></span>
+    </p>
+    <p title="Online">
+        Connection Status: <span id=con></span>
+    </p>
+    <p title="Keyboard">
+        Keyboard: <span id=key></span>
+    </p>
+    <hr />
+    <b>Sample code</b>
+    <pre id=sample>This text is not shown. Why?</pre>
+
+    <hr />
+
+    <script>
+        "use strict";
+        function init() {
+            //complete the code below
+            navigator.getBattery().then(b => {
+                sta.innerText = b.charging ? "Charging" : "Discharging"
+                lev.innerText = b.level * 100 + "%"
+                b.addEventListener('onchargingchange', () => {
+                    sta.innerText = b.charging ? "Charging" : "Discharging"
+                });
+            }
+            );
+            con.innerText = navigator.onLine ? "Online" : "Offline"
+            window.addEventListener("online", () => {
+                con.innerText = "Online"
+            })
+            window.addEventListener("offline", () => {
+                con.innerText = "Offline"
+            })
+            let keyList = []
+            window.addEventListener("keydown", (event) => {
+                if (!keyList.includes(event.key)) {
+                    keyList.push(event.key)
+                }
+                key.innerText = keyList.toString().replaceAll(",","+")
+            })
+            window.addEventListener("keyup", (event) => {
+                keyList.pop(event.key)
+                key.innerText = keyList.toString().replaceAll(",","+")
+            }
+            )
+        }
+        title.innerText = document.title;
+        sample.innerText = init + '\n';
+        init();
+    </script>
+
+</body>
+
+</html>
